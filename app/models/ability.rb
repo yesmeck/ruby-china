@@ -52,7 +52,7 @@ class Ability
 
   def roles_for_replies
     # 新手用户晚上禁止回帖，防 spam，可在面板设置是否打开
-    unless user.newbie? &&
+    if user.newbie? &&
            (Setting.reject_newbie_reply_in_the_evening == 'true') &&
            (Time.zone.now.hour < 9 || Time.zone.now.hour > 22)
       can :create, Reply
